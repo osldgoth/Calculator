@@ -8,6 +8,7 @@
     <script src="../src/calculator.js"></script>
 </head>
 <body>
+<body>
     <div class="calc">
         <div class="display">
             <div class="expression">123*456</div>
@@ -27,7 +28,7 @@
             <div><button>inv</button></div>
             
             <div><button>!</button></div>
-            <div><button>C</button></div>
+            <div><button>C</button></div> <!-- sessionStorage.clear(); -->
             <div><button>%</button></div>
             <div><button>del</button></div>
             <div><button>/</button></div>
@@ -45,10 +46,10 @@
             <div><button>-</button></div>
 
             <div><button>pi</button></div>
-            <div><button>1</button></div>
-            <div><button>2</button></div>
-            <div><button>3</button></div>
-            <div><button>+</button></div>
+            <div><button onclick="addNumeral(1)">1</button></div>
+            <div><button onclick="">2</button></div>
+            <div><button onclick="">3</button></div>
+            <div><button onclick="addNumeral('+')">+</button></div>
 
             <div><button>e</button></div>
             <div><button>00</button></div>

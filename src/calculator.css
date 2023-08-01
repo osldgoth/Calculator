@@ -26,6 +26,7 @@ body {
 
 .display{
     position: relative;
+    padding: 5%;
     margin-top: 5vh;
     text-align: right;
     color: #eee;

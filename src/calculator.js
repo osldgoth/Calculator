@@ -3,18 +3,16 @@ let statement = [];
 let history = {};
 
 const CalcButtonPress = function(x){
-    if (last == null && typeof(x) == 'number'){
+    if (statement.length == 0 && Number(x)){ //
       statement = [...statement, `${x}`]
-    } else if (typeof(last) == 'string' && typeof(x) == 'number'){ //this typeof == string is not going to work
-      statement = [...statement[lastIndex].concat(`${x}`)]
-    } else if (operands.includes(last) && typeof(x) == 'number'){
+    } else if (Number(statement[statement.length - 1]) && Number(x)){ 
+
+      statement = [...statement[statement.length - 1].concat(`${x}`)]
+    } else if (Number(statement[statement.length - 1]) && Number(x)){
       statement = [...statement, `${x}`]
-    }else if (typeof(last) == 'string' && operands.includes(x)){
-      statement = [...statement, `${x}`]
-    } else if (operands.includes(last) && operands.includes(x)){
+    } else if (Number(statement[statement.length - 1]) && Number(x)){
       statement[statement.length - 1] = `${x}`
     }
-    updateMemory(last, lastIndex, statement, operands)
     updateDisplay(statement);
     //'soft' calculate
 };
@@ -23,10 +21,7 @@ const calcClearPress = function(){
     updateDisplay(statement);
 }
 
-const calcDelPress = function(){
-       
-    console.log("after " + JSON.stringify(memory))
-    updateMemory(last, lastIndex, statement, operands)
+const calcDelPress = function(){   
     updateDisplay(statement);
 }
 
@@ -39,25 +34,33 @@ const equal = function(){
 
 }
 
-const updateMemory = function(last, lastIndex, statement, operands){
-    //console.log("updating")
-    memory = {
-        last,
-        lastIndex,
-        statement,
-        operands
-    };
-    //console.log(memory)
-}
-
-
 //Pseudocode first
 
 /* 
 //most buttons
 statement is ['111', '+', '222', '*',...]
-last is '222'
-lastIndex is 2
+
+if statement is 0 length // it is an empty array
+    OR if last element in statement is NAN //it is an operator
+    AND if x is Number
+    OR last element in statement is a number
+    AND x is NAN //it is an operator
+    ((1 OR 2) AND 3) OR (4 AND 5)
+      push x onto statement as a string
+  else if last element in statement is a number 
+    AND x is a number
+      pop last element off statement, concat x
+      push number back onto statement
+  
+
+if last element in statement is NAN 
+  AND X is NAN //both are operators
+    x replaces last element in statement
+
+
+
+
+
 if last is null and x being number
   add x to statement as string
   update last (being the string at statement[statement.length-1])

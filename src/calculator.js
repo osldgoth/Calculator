@@ -70,28 +70,28 @@ const updateMemory = function(last, lastIndex, statement, operands){
 
 /* 
 //most buttons
-statement is [[1,1,1], '+', [2,2,2], '*',...]
-last is [2,2,2]
+statement is ['111', '+', '222', '*',...]
+last is '222'
 lastIndex is 2
-if last is null
-  add x to statement via push
-  update last (being x)
-  lastIndex becomes statement.length-1
-if last is array and x is number
-  add x to statement[lastIndex] via push
-  update last (being the array statement[lastIndex])
+if last is null and x being number
+  add x to statement as string
+  update last (being the string at statement[statement.length-1])
+  lastIndex becomes length of statement - 1
+if last is a number and x is number
+  add x to statement via concat
+  update last (being the string at statement[statement.length-1])
   lastIndex remains the same
-if last is an operator and x is a number
-  add x to statement as an element in a new array
-  update last (being the array statment[statement.length-1]?)
-  lastIndex becomes statement.length-1
-if last is an array and x is an operator
-  add x to statement via push
-  update last (being x)
-  lastIndex becomes statement.length-1
+if last is an operator(ie NAN) and x is a number
+  set statement equal an array with spread statement and x
+  update last (being the array statment[statement.length-1])
+  lastIndex becomes length of statement - 1
+if last is a number and x is an operator
+  set statement equal an array with spread statement and x
+  update last (being the array statment[statement.length-1])
+  lastIndex becomes length of statement - 1
 if last and x are both operators
-  x replaces last element in statement
-  update last (being x)
+  x replaces last element in statement by using statement and lastIndex set to x
+  update last (being the string at statement[statement.length-1])
   lastIndex remains the same
 end
 updateMemory
@@ -99,7 +99,7 @@ update display
 +++++++++++++++++++++++++++++++++++++
 
 // del button
-statement is [[1,1,1], '+', [2,2,2], '*',...]
+statement is ['111', '+', '222', '*',...]
 
 if last is array (length > 0)
   select the array at statement[lastIndex] then .pop()?

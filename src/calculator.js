@@ -1,22 +1,3 @@
-// window.addEventListener('load', (event) => {
-//     // if(sessionStorage.getItem("calculatorMemory")){
-//     //     sessionStorage.removeItem("calculatorMemory")
-//     // }
-
-//     // if (!sessionStorage.getItem("calculatorMemory")){
-//     //     sessionStorage.setItem("calculatorMemory", JSON.stringify(attempt));
-//     //     // example storage:
-//     //     // {statementIndex:#<if this is even needed?>, statement: [111, '+', 222, '*', '(', 333, '/', 444, ')'], ? }
-              // statement: [[1,1,1], '+', [2,2,2], '*', '(', [3,3,3], '/', [4,4,4], ')'] --unnessary complexity?
-//     //     //there may be an easier way to do this?
-//     // }
-//     if (!sessionStorage.getItem('calculatorMemoryHistory')){
-//         //store calculatorMemory history - limit to 5?
-//         sessionStorage.setItem('calculatorMemoryHistory', {})
-//     }
-//     //I can see how React would thrive here lol
-// });
-
 let memory = { 
     last: null,
     lastIndex: 0,
@@ -27,51 +8,27 @@ let history = {};
 
 const CalcButtonPress = function(x){
     let {last, lastIndex, statement, operands} = memory;
-    if (last == null && typeof(x) == 'number'){ 
-      //statement.push([x])
-      console.log("<spread " + statement)
-      statement = [...statement, [[x]]]
-      console.log(">spread " + statement)
-
-                //console.log('last before ' + last)
-      last = statement[statement.length - 1] //lastIndex is 0 first time around, I can just use it here.
-                //console.log('last after ' + last)
-      lastIndex = statement.length - 1 //same?
-      //console.log('a')
-    } else if (typeof(last) == 'object' && typeof(x) == 'number'){ 
-        //console.log('statement before ' + statement)
-      //  console.log("<spread " + statement)
+    if (last == null && typeof(x) == 'number'){
+      statement = [...statement, [x]]
+      last = statement[statement.length - 1]
+      lastIndex = statement.length - 1
+    } else if (typeof(last) == 'object' && typeof(x) == 'number'){
       statement = [...statement, x]
-      //console.log(">spread " + statement)
-
-      //statement[lastIndex].push(x) //why does this update last?
-      //console.log("after statement " + statement)
-      //          console.log('last prior ?' + last) 
       last = statement[lastIndex]
-      //          console.log('last after ' + last)
-      //console.log('b')
     }
     if (operands.includes(last) && typeof(x) == 'number'){
-      //statement.push([x])
       statement = [...statement, [x]]
-      //    console.log('last prior ' + last)
       last = statement[statement.length - 1]
-      //    console.log('last after ' + last)
-      lastIndex = statement.length - 1//?
-      //console.log('c')
+      lastIndex = statement.length - 1
     }
     if (typeof(last) == 'object' && operands.includes(x)){
-      //statement.push(x)
       statement = [statement, x]
       last = x
-      lastIndex = statement.length - 1//?
-      //console.log('d')
+      lastIndex = statement.length - 1
     } else if (operands.includes(last) && operands.includes(x)){
       statement[lastIndex] = x
       last = x
-      //console.log('e')
     }
-    //console.log('out')
     updateMemory(last, lastIndex, statement, operands)
     updateDisplay(statement);
     //'soft' calculate

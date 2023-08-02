@@ -1,3 +1,4 @@
+//really don't need last or lastIndex if statemnt is an array of all strings
 let memory = { 
     last: null,
     lastIndex: 0,
@@ -101,18 +102,10 @@ update display
 // del button
 statement is ['111', '+', '222', '*',...]
 
-if last is array (length > 0)
-  select the array at statement[lastIndex] then .pop()?
-  update last to the array at statement[lastIndex -1]
-  lastIndex remains the same
-else (when length = 0)
-  remove array via pop?
-  update last to the array at statement[lastIndex-1]
-  lastIndex--
-if last is an operator
-  pop statement?
-  last to the array at statement[lastIndex -1]
-  lastIndex--
+if last lessthan 1
+  pop statement
+else if last is greater than 1
+  splice last element in statement
 end
 updateMemory
 update display

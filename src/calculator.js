@@ -1,35 +1,18 @@
-//really don't need last or lastIndex if statemnt is an array of all strings
-// don't need operands if I use Number('+') as well
-let memory = { 
-    last: null,
-    lastIndex: 0,
-    statement: [],
-    operands: ['+', '-', '/', '*', '(', ')', '^']
-};
+
+let statement = [];
 let history = {};
 
 const CalcButtonPress = function(x){
-    let {last, lastIndex, statement, operands} = memory;
     if (last == null && typeof(x) == 'number'){
       statement = [...statement, `${x}`]
-      last = statement[statement.length - 1]
-      lastIndex = statement.length - 1
     } else if (typeof(last) == 'string' && typeof(x) == 'number'){ //this typeof == string is not going to work
       statement = [...statement[lastIndex].concat(`${x}`)]
-      last = statement[lastIndex]
-      lastIndex = statement.length - 1
     } else if (operands.includes(last) && typeof(x) == 'number'){
       statement = [...statement, `${x}`]
-      last = statement[statement.length - 1]
-      lastIndex = statement.length - 1
     }else if (typeof(last) == 'string' && operands.includes(x)){
       statement = [...statement, `${x}`]
-      last = statement[statement.length - 1]
-      lastIndex = statement.length - 1
     } else if (operands.includes(last) && operands.includes(x)){
-      statement[lastIndex] = `${x}`
-      last = statement[statement.length - 1]
-      lastIndex = statement.length - 1
+      statement[statement.length - 1] = `${x}`
     }
     updateMemory(last, lastIndex, statement, operands)
     updateDisplay(statement);

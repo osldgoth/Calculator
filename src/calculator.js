@@ -3,25 +3,26 @@ let statement = [];
 let history = {};
 
 const CalcButtonPress = function(x){
-    if (statement.length == 0 && Number(x)){ //
-      statement = [...statement, `${x}`]
-    } else if (Number(statement[statement.length - 1]) && Number(x)){ 
-
-      statement = [...statement[statement.length - 1].concat(`${x}`)]
-    } else if (Number(statement[statement.length - 1]) && Number(x)){
-      statement = [...statement, `${x}`]
-    } else if (Number(statement[statement.length - 1]) && Number(x)){
-      statement[statement.length - 1] = `${x}`
-    }
-    updateDisplay(statement);
-    //'soft' calculate
+  const endEmement = statement.slice(-1)
+  if (((statement.length == 0 || isNaN(Number(endEmement))) && Number(x)) 
+      || ( Number(endEmement) && isNaN(Number(x)))) {
+    statement.push(x.toString())
+      }
+  else if (Number(endEmement) && Number(x)) {
+    statement.push(statement.pop().concat(x).toString())
+  }
+  else if (isNaN(Number(endEmement)) && isNaN(Number(x))) {
+    statement.splice(-1, 1, x.toString())
+          }
+  updateDisplay(statement);
+  //'soft' calculate
 };
 
 const calcClearPress = function(){
     updateDisplay(statement);
 }
 
-const calcDelPress = function(){   
+const calcDelPress = function(){
     updateDisplay(statement);
 }
 
@@ -40,22 +41,21 @@ const equal = function(){
 //most buttons
 statement is ['111', '+', '222', '*',...]
 
-if statement is 0 length // it is an empty array
-    OR if last element in statement is NAN //it is an operator
-    AND if x is Number
-    OR last element in statement is a number
-    AND x is NAN //it is an operator
+if 1 statement is 0 length // it is an empty array
+    OR 2 if last element in statement is NaN //it is an operator
+    AND 3 if x is Number
+    OR 4 last element in statement is a number
+    AND 5 x is NaN //it is an operator
     ((1 OR 2) AND 3) OR (4 AND 5)
       push x onto statement as a string
+
   else if last element in statement is a number 
     AND x is a number
       pop last element off statement, concat x
       push number back onto statement
-  
-
-if last element in statement is NAN 
-  AND X is NAN //both are operators
-    x replaces last element in statement
+  else if last element in statement is NaN 
+    AND X is NaN //both are operators
+        x replaces last element in statement
 
 
 
@@ -69,7 +69,7 @@ if last is a number and x is number
   add x to statement via concat
   update last (being the string at statement[statement.length-1])
   lastIndex remains the same
-if last is an operator(ie NAN) and x is a number
+if last is an operator(ie NaN) and x is a number
   set statement equal an array with spread statement and x
   update last (being the array statment[statement.length-1])
   lastIndex becomes length of statement - 1

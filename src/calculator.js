@@ -23,6 +23,10 @@ const calcClearPress = function(){
 }
 
 const calcDelPress = function(){
+  const endEmement = statement.slice(-1)
+  if (endEmement.length > 1 ){
+
+  } else if (){}
     updateDisplay(statement);
 }
 
@@ -57,33 +61,6 @@ if 1 statement is 0 length // it is an empty array
     AND X is NaN //both are operators
         x replaces last element in statement
 
-
-
-
-
-if last is null and x being number
-  add x to statement as string
-  update last (being the string at statement[statement.length-1])
-  lastIndex becomes length of statement - 1
-if last is a number and x is number
-  add x to statement via concat
-  update last (being the string at statement[statement.length-1])
-  lastIndex remains the same
-if last is an operator(ie NaN) and x is a number
-  set statement equal an array with spread statement and x
-  update last (being the array statment[statement.length-1])
-  lastIndex becomes length of statement - 1
-if last is a number and x is an operator
-  set statement equal an array with spread statement and x
-  update last (being the array statment[statement.length-1])
-  lastIndex becomes length of statement - 1
-if last and x are both operators
-  x replaces last element in statement by using statement and lastIndex set to x
-  update last (being the string at statement[statement.length-1])
-  lastIndex remains the same
-end
-updateMemory
-update display
 +++++++++++++++++++++++++++++++++++++
 
 // del button
@@ -97,25 +74,7 @@ end
 updateMemory
 update display
 
-
 -----------------------------------
-
-//button clicked 'x' (for most buttons)
-if last item and x are both numbers
-    concat last item and x in memory
-    set concat as last
-if last is a number and x is an operator or 
-   last is an operator and x is a number
-    push x into statement
-    set last to x
-    set lastIndex
-if last item and x are both operators
-    x replaces last item
-end
-set session storage
-update display
-
-
 
 //button clicked 'equals' --recursive oppertunity
 //order of opperations -carefuly

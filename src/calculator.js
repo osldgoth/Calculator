@@ -23,10 +23,12 @@ const calcClearPress = function(){
 }
 
 const calcDelPress = function(){
-  const endEmement = statement.slice(-1)
-  if (endEmement.length > 1 ){
-
-  } else if (){}
+  const endEmement = statement.slice(-1).toString()
+  if (endEmement.length <= 1 ){
+    statement.pop();
+  } else if (endEmement.length > 1){
+    statement.splice(-1, 1, endEmement.substring(0, endEmement.length - 1))
+  }
     updateDisplay(statement);
 }
 

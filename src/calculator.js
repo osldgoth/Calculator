@@ -7,19 +7,18 @@ const CalcButtonPress = function(x){
   if (((statement.length == 0 || isNaN(Number(endEmement))) && Number(x)) 
       || ( Number(endEmement) && isNaN(Number(x)))) {
     statement.push(x.toString())
-      }
-  else if (Number(endEmement) && Number(x)) {
+  } else if (Number(endEmement) && Number(x)) {
     statement.push(statement.pop().concat(x).toString())
-  }
-  else if (isNaN(Number(endEmement)) && isNaN(Number(x))) {
+  } else if (isNaN(Number(endEmement)) && isNaN(Number(x))) {
     statement.splice(-1, 1, x.toString())
-          }
+  }
   updateDisplay(statement);
   //'soft' calculate
 };
 
 const calcClearPress = function(){
-    updateDisplay(statement);
+  statement = []
+  updateDisplay(statement);
 }
 
 const calcDelPress = function(){

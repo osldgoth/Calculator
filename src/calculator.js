@@ -5,12 +5,14 @@ let history = {};
 const CalcButtonPress = function(x){
   const endEmement = statement.slice(-1)
   if (((statement.length == 0 || isNaN(Number(endEmement))) && Number(x)) 
-      || ( Number(endEmement) && isNaN(Number(x)))) {
+      || ( Number(endEmement) && isNaN(Number(x)))){
     statement.push(x.toString())
   } else if (Number(endEmement) && Number(x)) {
     statement.push(statement.pop().concat(x).toString())
   } else if (isNaN(Number(endEmement)) && isNaN(Number(x))) {
     statement.splice(-1, 1, x.toString())
+  } else if (Number(endEmement) && (x === '00' || x === 0)){
+    statement.push(statement.pop().concat(x).toString())
   }
   updateDisplay(statement);
   //'soft' calculate

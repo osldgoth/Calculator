@@ -48,20 +48,20 @@ const equal = function(){
 statement is ['111', '+', '222', '*',...]
 
 if 1 statement is 0 length // it is an empty array
-    OR 2 if last element in statement is NaN //it is an operator
+    OR 2 if endElement in statement is NaN //it is an operator
     AND 3 if x is Number
-    OR 4 last element in statement is a number
+    OR 4 endElement in statement is a number
     AND 5 x is NaN //it is an operator
     ((1 OR 2) AND 3) OR (4 AND 5)
       push x onto statement as a string
 
-  else if last element in statement is a number 
+  else if endElement in statement is a number 
     AND x is a number
-      pop last element off statement, concat x
+      pop endElement off statement, concat x
       push number back onto statement
-  else if last element in statement is NaN 
+  else if endElement in statement is NaN 
     AND X is NaN //both are operators
-        x replaces last element in statement
+        x replaces endElement in statement
 
 +++++++++++++++++++++++++++++++++++++
 
@@ -71,7 +71,7 @@ statement is ['111', '+', '222', '*',...]
 if last lessthan 1
   pop statement
 else if last is greater than 1
-  splice last element in statement
+  splice endElement in statement
 end
 updateMemory
 update display

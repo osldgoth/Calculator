@@ -3,13 +3,13 @@ let statement = [];
 let history = {};
 
 const CalcButtonPress = function(x){
-  const endEmement = statement.slice(-1)
-  if (((statement.length == 0 || isNaN(Number(endEmement))) && Number(x)) 
-      || ( Number(endEmement) && isNaN(Number(x)))){
+  const endElement = statement.slice(-1)
+  if (((statement.length == 0 || isNaN(Number(endElement))) && Number(x)) 
+      || ( Number(endElement) && isNaN(Number(x)))){
     statement.push(x.toString())
-  } else if (Number(endEmement) && (Number(x) || (x === '00' || x === 0))){
+  } else if (Number(endElement) && (Number(x) || (x === '00' || x === 0))){
     statement.push(statement.pop().concat(x).toString())
-  } else if (isNaN(Number(endEmement)) && isNaN(Number(x))) {
+  } else if (isNaN(Number(endElement)) && isNaN(Number(x))) {
     statement.splice(-1, 1, x.toString())
   } 
   updateDisplay(statement);
@@ -23,11 +23,11 @@ const calcClearPress = function(){
 }
 
 const calcDelPress = function(){
-  const endEmement = statement.slice(-1).toString()
-  if (endEmement.length <= 1 ){
+  const endElement = statement.slice(-1).toString()
+  if (endElement.length <= 1 ){
     statement.pop();
-  } else if (endEmement.length > 1){
-    statement.splice(-1, 1, endEmement.substring(0, endEmement.length - 1))
+  } else if (endElement.length > 1){
+    statement.splice(-1, 1, endElement.substring(0, endElement.length - 1))
   }
     updateDisplay(statement);
 }

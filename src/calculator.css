@@ -22,6 +22,7 @@ body {
     width: 25vw;
     min-width: 20vw;
     margin-top: 1vh;
+    border-radius: 20px;
 }
 
 .display{

@@ -12,10 +12,10 @@
     <div class="calc">
         <div class="display">
             <div id="exp" class="expression"></div>
-            <div class="answer"></div>
+            <div id ="ans" class="answer"></div>
         </div>
         <div class="buttons">
-            <div><button>sin</button></div>
+            <!-- <div><button>sin</button></div>
             <div><button>cos</button></div>
             <div><button>tan</button></div>
             <div><button>rad</button></div>
@@ -23,37 +23,37 @@
 
             <div><button>log</button></div>
             <div><button>ln</button></div>
-            <div><button "CalcButtonPress('(')">(</button></div>
-            <div><button "CalcButtonPress(')')">)</button></div>
-            <div><button>inv</button></div>
-            
-            <div><button>!</button></div>
+            <div><button onclick="CalcButtonPress('(')">(</button></div>
+            <div><button onclick="CalcButtonPress(')')">)</button></div>
+             <div><button>inv</button></div>
+            -->
+            <!-- <div><button>!</button></div> -->
             <div><button onclick="calcClearPress()">C</button></div>
-            <div><button>%</button></div>
+            <div><button> </button></div>
             <div><button onclick="calcDelPress()">del</button></div>
             <div><button onclick="CalcButtonPress('/')">/</button></div>
 
-            <div><button>^</button></div>
-            <div><button onclick="CalcButtonPress(7)">7</button></div>
-            <div><button onclick="CalcButtonPress(8)">8</button></div>
-            <div><button onclick="CalcButtonPress(9)">9</button></div>
+            <!-- <div><button>^</button></div> -->
+            <div><button onclick="CalcButtonPress('7')">7</button></div>
+            <div><button onclick="CalcButtonPress('8')">8</button></div>
+            <div><button onclick="CalcButtonPress('9')">9</button></div>
             <div><button onclick="CalcButtonPress('*')">*</button></div>
 
-            <div><button>sqrt</button></div>
-            <div><button onclick="CalcButtonPress(4)">4</button></div>
-            <div><button onclick="CalcButtonPress(5)">5</button></div>
-            <div><button onclick="CalcButtonPress(6)">6</button></div>
+            <!-- <div><button>sqrt</button></div> -->
+            <div><button onclick="CalcButtonPress('4')">4</button></div>
+            <div><button onclick="CalcButtonPress('5')">5</button></div>
+            <div><button onclick="CalcButtonPress('6')">6</button></div>
             <div><button onclick="CalcButtonPress('-')">-</button></div> <!-- allow negitives first-->
 
-            <div><button>pi</button></div>
-            <div><button onclick="CalcButtonPress(1)">1</button></div>
-            <div><button onclick="CalcButtonPress(2)">2</button></div>
-            <div><button onclick="CalcButtonPress(3)">3</button></div>
+            <!-- <div><button>pi</button></div> -->
+            <div><button onclick="CalcButtonPress('1')">1</button></div>
+            <div><button onclick="CalcButtonPress('2')">2</button></div>
+            <div><button onclick="CalcButtonPress('3')">3</button></div>
             <div><button onclick="CalcButtonPress('+')">+</button></div>
 
-            <div><button>e</button></div>
+            <!-- <div><button>e</button></div> -->
             <div><button onclick="CalcButtonPress('00')">00</button></div>
-            <div><button onclick="CalcButtonPress(0)">0</button></div>
+            <div><button onclick="CalcButtonPress('0')">0</button></div>
             <div><button onclick="decimalButtonPress('.')">.</button></div>
             <div><button>=</button></div>
         </div>

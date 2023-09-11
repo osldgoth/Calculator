@@ -50,7 +50,7 @@ body {
     height: 75vh;
     margin-top: 5vh;
     column-gap: 1.5vw;
-    grid-template: auto / auto auto auto auto auto;
+    grid-template: auto / auto auto auto auto;
     justify-content: center;
     align-items: center;
     /* border: lime 2px solid; */

@@ -1,21 +1,60 @@
 
 let statement = [];
+let decimalFlag = false;
 let history = {};
 
 const CalcButtonPress = function(x){
-  const endElement = statement.slice(-1)
-  if (((statement.length == 0 || isNaN(Number(endElement))) && Number(x)) 
-      || ( Number(endElement) && isNaN(Number(x)))){
+  const endElement = statement.slice(-1).toString()
+
+    //(statement is 0 length OR endElement is NaN) AND x is Number
+  if (( (statement.length === 0 || isNaN(Number(endElement)) || Number(endElement) === 0) && Number(x))
+    //OR (endElement is a number AND x is NaN) //it is an operator
+      || ( Number(endElement) && isNaN(Number(x)))
+  ){
+
     statement.push(x.toString())
+
+    //endElement is a number AND (x is a number OR x is '00' OR x is 0)
   } else if (Number(endElement) && (Number(x) || (x === '00' || x === 0))){
+
     statement.push(statement.pop().concat(x).toString())
-  } else if (isNaN(Number(endElement)) && isNaN(Number(x))) {
-    statement.splice(-1, 1, x.toString())
-  } 
-  updateDisplay(statement);
-  console.log(statement)
+
+    //endElement in statement is (NaN OR a decimal) AND x is NaN -- I will never have *-, +- ect using this code, which is fine. just a note.
+  } else if ((isNaN(Number(endElement)) || endElement === '.') && isNaN(Number(x))) {
+    //Bug, current code prevents operators first so no negitive first number, however one can input a decimal first, then minus. this effectively starts the statement with a negitive number
+    // or further bug start with any operator.
+    const elementBeforeDecimal = statement.slice(-2, -1).toString()
+    //How many items to remove to replace the operator
+    // removes "[operator]0."
+    
+    elementBeforeDecimal.length === 1 && elementBeforeDecimal === '0' ? spliceQuantity = 3: spliceQuantity = 1;
+
+    statement.splice(-spliceQuantity, spliceQuantity, x.toString())
+
+  }
+
+  updateDisplay();
   //'soft' calculate
+  softEqual()
 };
+
+
+const decimalButtonPress = function(x){
+  
+  const endElement = statement.slice(-1).toString()
+  if (endElement === '.') {return}
+  if (statement.length === 0 || isNaN(Number(endElement))){
+    statement.push("0")
+    statement.push(x)
+  } else if (Number(endElement) || Number(endElement) === 0){
+    statement.push(x.toString())
+  }
+  const endElementUpdated = statement.slice(-1).toString()
+  if (endElementUpdated.includes('.')){
+    decimalFlag = true;
+  }
+  updateDisplay();
+}
 
 const calcClearPress = function(){
   statement = []
@@ -23,18 +62,31 @@ const calcClearPress = function(){
 }
 
 const calcDelPress = function(){
+  if (statement.length === 0){return}
   const endElement = statement.slice(-1).toString()
   if (endElement.length <= 1 ){
     statement.pop();
   } else if (endElement.length > 1){
     statement.splice(-1, 1, endElement.substring(0, endElement.length - 1))
-  }
-    updateDisplay(statement);
+  } 
+  updateDisplay();
 }
 
-const updateDisplay = function(statement){
+const updateDisplay = function(){
     const expressionDisplay = document.getElementById("exp")
     expressionDisplay.innerText = statement.join('')
+}
+
+const softEqual = function(){ 
+  const operatorIndicies = statement.reduce((ops, currentValue, index) => {
+    if(["*","/","+","-"].includes(currentValue)){
+      return {...ops, [currentValue]: [...ops[currentValue].concat(index)]};
+    };
+    return ops;
+  }, {"*": [], "/": [], "+": [], "-": []});
+
+
+  
 }
 
 const equal = function(){
@@ -60,7 +112,7 @@ if 1 statement is 0 length // it is an empty array
       pop endElement off statement, concat x
       push number back onto statement
   else if endElement in statement is NaN 
-    AND X is NaN //both are operators
+    AND x is NaN //both are operators
         x replaces endElement in statement
 
 +++++++++++++++++++++++++++++++++++++

@@ -33,6 +33,33 @@ const CalcButtonPress = function(x){
 
   }
 
+  //--watch for numbers being split up ["2", "4", "7"...]
+  const CalcButtonPressx = function(x){
+    const endElement = statement.slice(-1).toString()
+    const zeroToNine = ["0","1","2","3","4","5","6","7","8","9"]
+    const statementLengthZero = statement.length === 0;
+    const statementLengthOne = statement.length === 1;
+    const statementLengthGTOne = statement.length >= 1;
+  
+    if (  (endElement === "-" && statementLengthGTOne && [...zeroToNine, ".", "*", "/", "+"].includes(x)) //NOT "00"
+      || (["*", "/", "+"].includes(endElement) && [...zeroToNine, ".", "*", "/", "+", "-"].includes(x))){ //negative any other time //NOT "00"
+        if ( (["*", "/", "+"].includes(x))  //replace "-" with one of these
+          ||(["+"].includes(endElement) )){ //replace "+" with "-" but don't replace "*" or "/"
+            statement.pop()
+        }
+        statement.push(x)
+    } else if ( (statementLengthZero && [...zeroToNine, ".", "-"].includes(x)) //NOT "00" "*", "/", "+"
+      || (endElement === "." && [...zeroToNine, "00", "*", "/", "+", "-"].includes(x)) //NOT "."
+      || (endElement === "-" && statementLengthOne && [...zeroToNine, "."].includes(x)) //begin with a negative //NOT "00" "*", "/", "+", "-"
+      || (zeroToNine.includes(endElement) && [...zeroToNine,"00", "*", "/", "+", "-" ].includes(x))){ //NOT "."
+        statement.push(x)
+    }else{
+        console.log(`missed endElement ${endElement}, x ${x}`)
+    }
+    updateDisplay(statement);
+    console.log("statement in calcBtnPrss", statement)
+  }
+
   updateDisplay();
   //'soft' calculate
   softEqual()

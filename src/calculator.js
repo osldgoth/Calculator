@@ -104,14 +104,38 @@ const updateDisplay = function(){
     expressionDisplay.innerText = statement.join('')
 }
 
+const calcPlus = function(input){
+
+  for(i = 0; i <= input.length - 1; i++){
+    if (input[i] === "+"){
+      let beforei = Number(input[i-1]);
+      let afterI = Number(input[i+1]);
+      //TODO edge case where end of statement is an operator
+      const value = beforei + afterI;
+      let output = [...input];
+      output.splice(i-1, 3, value.toString());
+      console.log(output)
+      return output;
+    }
+  }
+} 
+
 const softEqual = function(){ 
-  const operatorIndicies = statement.reduce((ops, currentValue, index) => {
+  let statementCopy = [...statement]
+  while(statementCopy.includes("+")){
+    statementCopy = calcPlus(statementCopy);
+  }
+  console.log(statementCopy)
+
+
+  /* const operatorIndicies = statement.reduce((ops, currentValue, index) => {
     if(["*","/","+","-"].includes(currentValue)){
       return {...ops, [currentValue]: [...ops[currentValue].concat(index)]};
     };
     return ops;
-  }, {"*": [], "/": [], "+": [], "-": []});
+  }, {"*": [], "/": [], "+": [], "-": []}); */
 
+  
 
   
 }

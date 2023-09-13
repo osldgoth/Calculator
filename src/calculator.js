@@ -104,6 +104,21 @@ const updateDisplay = function(){
     expressionDisplay.innerText = statement.join('')
 }
 
+const replaceDec = function(input){
+
+  for(i = 0; i <= input.length - 1; i++){
+    if (input[i] === "."){
+      let beforei = Number(input[i-1]);
+      let afterI = Number(input[i+1]);
+      //TODO edge case where end of statement is an operator
+      const value = `${beforei}.${afterI}`;
+      let output = [...input];
+      output.splice(i-1, 3, value.toString());
+      return output;
+    }
+  }
+} 
+
 const calcMult = function(input){
 
   for(i = 0; i <= input.length - 1; i++){
@@ -163,6 +178,9 @@ const calcSub = function(input){
 
 const softEqual = function(){ 
   let statementCopy = [...statement]
+  while(statementCopy.includes(".")){
+    statementCopy = replaceDec(statementCopy)
+  }
   while(statementCopy.includes("*")){
     statementCopy = calcMult(statementCopy);
   }
